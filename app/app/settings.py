@@ -17,6 +17,8 @@ DEBUG = os.getenv("DEBUG", 'off') == 'on'
 
 ALLOWED_HOSTS = []
 
+# REST_USE_JWT = True
+
 
 # Application definition
 
@@ -27,6 +29,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # "rest_auth.registration",
+    "rest_framework",
+    "rest_framework_simplejwt",
+    'news',
     'main'
 ]
 
@@ -45,7 +51,7 @@ ROOT_URLCONF = "app.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["main/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -94,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru-ru"
 
 TIME_ZONE = "UTC"
 
@@ -108,7 +114,20 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static/main_site",
+# ]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASSES': ( 'rest_Framework.pagination.PageNumberPagination',
+      'PAGE_SIZE = 20'
+    ),
+}

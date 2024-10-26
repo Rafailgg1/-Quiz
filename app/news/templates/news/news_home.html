@@ -1,0 +1,23 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Выбор Викторин{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Выбор Викторин</h1>
+        {% if news%}
+        {% for el in news %}
+            <div class="alert alert-warning">
+                <h3>{{ el.title }}</h3>
+                <p>{{ el.content }}</p>
+            </div>
+        {% endfor %}
+     {% else %}
+      <p>Викторин нет</p>
+     {% endif %}
+
+     {% Коментарии %}
+    </div>
+{% endblock %}
+
+   
